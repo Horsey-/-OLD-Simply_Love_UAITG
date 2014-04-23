@@ -676,7 +676,7 @@ modRate = 1
 ModsPlayer = {}
 ModsMaster = {}
 ModsMaster.Perspective =	{ modlist = {'Overhead','Hallway','Distant','Incoming','Space'}, Select = 1 }
-ModsMaster.NoteSkin =		{ modlist = {'Cel','Metal','Flat','Robot','Vivid'}, Select = 1 }
+ModsMaster.NoteSkin =		{ modlist = {'Metal','Cel','Vivid','Flat','Robot'}, Select = 1 }
 ModsMaster.Turn =			{ modlist = {'Mirror','Left','Right','Shuffle','Blender'}, default = 'no mirror,no left,no right,no shuffle,no supershuffle', mods = {'mirror','left','right','shuffle','supershuffle'} }
 ModsMaster.Hide = 			{ modlist = {'Hide Targets','Hide Judgments','Hide Background'}, default ='no dark,no blind,no cover', mods = {'dark','blink','cover'} }
 ModsMaster.Accel =			{ modlist = {'Accel','Decel','Wave','Boomerang','Expand','Bump'}, default = 'no boost,no brake,no wave,no boomerang,no expand,no bumpy', mods = {'Boost','Brake','Wave','Boomerang','Expand','Bumpy'} }
@@ -1065,16 +1065,21 @@ end
 --------------------------------
 
 function FrameOn(self)
-	frameIgnore = {}
-	optionRow = {}
-	optionRowText = {}
-	optionUnderlineSprite = {}
-	optionCursor = {}
-	optionCursorSprite = {}
-	optionHighlight = {}
-	captureIndex = 0
-	self:propagate(1)
-	for i=1,3 do self:queuecommand('Capture') end
+     frameIgnore = {}
+     optionRow = {}
+     optionRowText = {}
+     optionUnderlineSprite = {}
+     optionCursor = {}
+     optionCursorSprite = {}
+     optionHighlight = {}
+     captureIndex = 0
+     self:propagate(1)
+     for i=1,3 do self:queuecommand('Capture') end
+     if Color() == 13 then
+          self:addx(-SCREEN_WIDTH)
+          self:decelerate(0.3)
+          self:addx(SCREEN_WIDTH)
+     end
 end
 
 function FrameCapture(self) -- I had a simpler version which checked parent, but on ITG machines parent is not an argument of propagated commands.
@@ -1145,4 +1150,17 @@ function CancelAll(self)
 	for s,v in pairs(ModsPlayer) do if tonumber(v[pn]) then v[pn] = 0 else v[pn] = nil end end
 	for i,v in ipairs(playerOptions[optionIndex]) do InitializeOptionRow(i) end
 	self:queuecommand('Go')
+end
+
+-- function required for song folder directory function in ~\Graphics\ScreenSelectMusic banner frame\default.xml
+function SSMSongLocText( actor )
+   Trace( "SSMSongLocText" )
+   local song = GAMESTATE:GetCurrentSong();
+   local text = ""
+   if song then
+	local fulldir = song:GetSongDir();
+	local short = string.sub(fulldir, 8, -2);
+	text = short
+   end
+   actor:settext( text )
 end

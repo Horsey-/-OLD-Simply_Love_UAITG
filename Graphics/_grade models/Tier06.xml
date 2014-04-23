@@ -1,11 +1,32 @@
 <ActorFrame>
 	<children>
+	<!-- Theme 13 Grade -->
 		<ActorFrame
-			OnCommand="zoom,0.85"
+			Condition="Color() == 13"
 		>
 			<children>
 				<Actor
-					File="s.png"
+					File="star1.txt"
+					OnCommand="x,-19;y,20;;zoom,0.6;wag;EffectMagnitude,0,4,10"
+				/>
+				<Actor
+					File="star1.txt"
+					OnCommand="x,19;y,-20;zoom,0.6;wag;EffectMagnitude,0,4,10"
+				/>
+			</children>
+		</ActorFrame>
+	<!-- SL Grade -->
+		<ActorFrame
+			Condition="Color() < 13"
+		>
+			<children>
+				<Actor
+					File="star.png"
+					OnCommand="x,-39;y,40;zoom,0.6;pulse;EffectMagnitude,1,0.9,0"
+				/>
+				<Actor
+					File="star.png"
+					OnCommand="x,39;y,-40;zoom,0.6;effectoffset,0.2;pulse;EffectMagnitude,0.9,1,0"
 				/>
 			</children>
 		</ActorFrame>

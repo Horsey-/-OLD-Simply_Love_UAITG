@@ -1,0 +1,38 @@
+<ActorFrame> <children>
+	<Layer 
+		Type="Quad"
+		Condition="Color() < 13"
+		Command="diffuse,#FFFFFFA0;stretchto,SCREEN_LEFT,SCREEN_BOTTOM-24,SCREEN_RIGHT,SCREEN_BOTTOM"
+	/>
+<!-- stage artwork -->
+	<Layer
+		File="@'../BGAnimations/_13assets/ScreenWithMenuElements stage '..GetStageText()"
+		Condition="Color() == 13"		
+		InitCommand="%function(self)
+			if 
+				PREFSMAN:GetPreference('MenuTimer') == false 
+			then
+				self:x(SCREEN_CENTER_X)
+			else
+				self:x(SCREEN_CENTER_X-(SCREEN_CENTER_X/5))
+			end				
+			self:y(SCREEN_BOTTOM+36+2);
+			self:draworder(400);
+			self:zoomy(0.6);
+			self:zoomx(0.8);
+			self:shadowlength(2);
+			self:horizalign('center');
+			self:decelerate(0.75);
+			self:addy(-50)
+		end"	
+		OffCommand="accelerate,0.75;addy,50"		
+	/>
+<!-- bottom bar -->
+	<Layer
+		File="../BGAnimations/_13assets/bottombar.png"
+		Condition="Color() == 13"
+		InitCommand="draworder,-400"
+		OnCommand="y,587+6;x,SCREEN_CENTER_X;decelerate,0.75;addy,-50" 
+		OffCommand="accelerate,0.75;addy,50"
+	/>
+</children> </ActorFrame>

@@ -1,11 +1,29 @@
 <ActorFrame>
 	<children>
+	<!-- Theme 13 Grade -->
 		<ActorFrame
-			OnCommand="zoom,0.85"
+			OnCommand="zoom,0.7;wag;EffectMagnitude,0,0,10"
+			Condition="Color() == 13"
 		>
 			<children>
 				<Actor
-					File="b-plus.png"
+					File="a.txt"
+					OnCommand="x,-20"
+				/>
+				<Actor
+					File="plus.txt"
+					OnCommand="x,35"
+				/>
+			</children>
+		</ActorFrame>
+	<!-- SL Grade -->
+		<ActorFrame
+			OnCommand="zoom,0.85"
+			Condition="Color() < 13"
+		>
+			<children>
+				<Actor
+					File="a-plus.png"
 				/>
 			</children>
 		</ActorFrame>

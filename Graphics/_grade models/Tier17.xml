@@ -1,7 +1,20 @@
 <ActorFrame>
 	<children>
+	<!-- Theme 13 Grade -->
+		<ActorFrame
+			Condition="Color() == 13"
+			OnCommand="zoom,0.85;wag;EffectMagnitude,0,10,0"
+		>
+			<children>
+				<Actor
+					File="d.txt"
+				/>
+			</children>
+		</ActorFrame>
+	<!-- SL Grade -->
 		<ActorFrame
 			OnCommand="zoom,0.85"
+			Condition="Color() < 13"
 		>
 			<children>
 				<Actor

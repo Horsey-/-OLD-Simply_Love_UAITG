@@ -1,9 +1,11 @@
 <ActorFrame> <children>
+<!-- SL step bubbles -->
+	<Layer Class="ActorFrame"  Condition="Color() < 13"><children>
 <!-- Player One Step Artist -->
 	<Layer
 		Type="ActorFrame"
 		Condition="GAMESTATE:IsPlayerEnabled(PLAYER_1)"
-		InitCommand="x,SCREEN_CENTER_X-275;y,258;zoomy,0"
+		InitCommand="x,SCREEN_CENTER_X-275;y,275;zoomy,0"
 		OnCommand="sleep,0.3;accelerate,0.2;zoomy,1;decelerate,0.2;zoomy,0.8;accelerate,0.1;zoomy,1"
 	><children>
 		<Layer
@@ -34,7 +36,7 @@
 	<Layer
 		Type="ActorFrame"
 		Condition="GAMESTATE:IsPlayerEnabled(PLAYER_2)"
-		InitCommand="x,SCREEN_CENTER_X-44;y,337;zoomy,0"
+		InitCommand="x,SCREEN_CENTER_X-44;y,354;zoomy,0"
 		OnCommand="sleep,0.4;accelerate,0.2;zoomy,1;decelerate,0.2;zoomy,0.6;accelerate,0.1;zoomy,1"
 	><children>
 		<Layer
@@ -60,9 +62,125 @@
 			OnCommand="y,29;horizalign,left;ShadowLength,0;diffuse,#000000;zoomx,0.5;zoomy,0.1;accelerate,0.3;zoom,0.5"
 		/>
 	</children></Layer>
-	<Quad Command="stretchto,SCREEN_LEFT,SCREEN_TOP,SCREEN_RIGHT,SCREEN_TOP+32;diffuse,#000000" />
-	<Quad Command="stretchto,SCREEN_LEFT,SCREEN_BOTTOM,SCREEN_RIGHT,SCREEN_BOTTOM-24;diffuse,#000000" />
-	<Quad Command="stretchto,SCREEN_CENTER_X+320,SCREEN_BOTTOM,SCREEN_RIGHT,SCREEN_TOP;diffuse,#000000" />
-	<Layer Condition="not GAMESTATE:IsCourseMode()" File="DifficultyList.xml" Command="x,SCREEN_CENTER_X-256;y,SCREEN_CENTER_Y+25.5" OffCommand="linear,.3;diffusealpha,0" SongInfoMessageCommand="queuecommand,Update" />
+	</children></Layer>
+<!-- Begin Color 13 step bubbles -->
+	<Layer Class="ActorFrame"  Condition="Color() == 13" OffCommand="accelerate,0.75;addx,SCREEN_WIDTH"><children>
+	<!-- Color 13 Player One Step Artist -->
+		<Layer
+			Type="ActorFrame"
+			Condition="GAMESTATE:IsPlayerEnabled(PLAYER_1)"
+			InitCommand="x,SCREEN_CENTER_X+92-2;y,383;zoomy,0"
+			OnCommand="sleep,0.4;accelerate,0.2;zoomy,1;decelerate,0.2;zoomy,0.6;accelerate,0.1;zoomy,1"
+		><children>
+			<Layer
+				File="stepbubble13.png"
+				InitCommand="x,-47;y,49;rotationz,180;shadowlength,1;playcommand,Set"
+				SetCommand="%function(self) self:diffuse(BubbleColorRGB(PLAYER_1)) end" 
+				CurrentSongChangedMessageCommand="playcommand,Set" 
+				CurrentStepsP1ChangedMessageCommand="playcommand,Set" 
+			/>
+			<Layer 
+				Font="_misobold small"
+				Text="???" 
+				OnCommand="y,46;x,-5;zoom,0.5;shadowlength,0;horizalign,right;maxwidth,250;zoomx,0.5;zoomy,0.1;accelerate,0.3;zoom,0.5" 
+				SetCommand="%function(self) self:settext(GetStepsDescriptionText(PLAYER_1)) self:diffuse(BubbleColorText(PLAYER_1)) end" 
+				CurrentSongChangedMessageCommand="playcommand,Set" 
+				CurrentStepsP1ChangedMessageCommand="playcommand,Set" 
+			/>
+			<Layer 
+				Type="BitmapText"
+				Condition="not GAMESTATE:IsCourseMode()"
+				Font="_misoreg small"
+				Text="STEPS"
+				OnCommand="y,46;horizalign,left;ShadowLength,0;diffuse,#000000;zoomx,0.5;zoomy,0.1;accelerate,0.3;zoom,0.5;queuecommand,Set"
+				SetCommand="%function(self) self:diffuse(BubbleColorLabelRGB(PLAYER_1)) end"
+				CurrentSongChangedMessageCommand="playcommand,Set" 
+				CurrentStepsP1ChangedMessageCommand="playcommand,Set"
+			/>
+		</children></Layer>
+	<!-- Color 13 Player Two Step Artist -->
+		<Layer
+			Type="ActorFrame"
+			Condition="GAMESTATE:IsPlayerEnabled(PLAYER_2)"
+			InitCommand="x,SCREEN_CENTER_X+270+2;y,383;zoomy,0"
+			OnCommand="sleep,0.4;accelerate,0.2;zoomy,1;decelerate,0.2;zoomy,0.6;accelerate,0.1;zoomy,1"
+		><children>
+			<Layer
+				File="stepbubble13.png"
+				InitCommand="x,-47;y,49;rotationz,180;shadowlength,1;playcommand,Set"
+				SetCommand="%function(self) self:diffuse(BubbleColorRGB(PLAYER_2)) end" 
+				CurrentSongChangedMessageCommand="playcommand,Set" 
+				CurrentStepsP2ChangedMessageCommand="playcommand,Set" 
+			/>
+			<Layer 
+				Font="_misobold small"
+				Text="???" 
+				OnCommand="y,46;x,-5;zoom,0.5;shadowlength,0;horizalign,right;maxwidth,250;zoomx,0.5;zoomy,0.1;accelerate,0.3;zoom,0.5" 
+				SetCommand="%function(self) self:settext(GetStepsDescriptionText(PLAYER_2)) self:diffuse(BubbleColorText(PLAYER_2)) end" 
+				CurrentSongChangedMessageCommand="playcommand,Set" 
+				CurrentStepsP2ChangedMessageCommand="playcommand,Set" 
+			/>
+			<Layer 
+				Type="BitmapText"
+				Condition="not GAMESTATE:IsCourseMode()"
+				Font="_misoreg small"
+				Text="STEPS"
+				OnCommand="y,46;horizalign,left;ShadowLength,0;diffuse,#000000;zoomx,0.5;zoomy,0.1;accelerate,0.3;zoom,0.5;queuecommand,Set"
+				SetCommand="%function(self) self:diffuse(BubbleColorLabelRGB(PLAYER_2)) end"
+				CurrentSongChangedMessageCommand="playcommand,Set" 
+				CurrentStepsP2ChangedMessageCommand="playcommand,Set"
+			/>
+		</children></Layer>
+	</children></Layer>
+	<!-- whole difficulty list -->	
+		<Layer 
+			Condition="not GAMESTATE:IsCourseMode()" 
+			File="DifficultyList.xml" 
+			Command="%function(self)
+				if Color() == 13 then
+					self:x(SCREEN_CENTER_X+34)
+					self:y(SCREEN_TOP+236)
+					self:queuecommand('Animation')
+				else
+					self:x(SCREEN_CENTER_X-256);
+					self:y(SCREEN_CENTER_Y+25.5+18);
+				end
+			end"
+			AnimationCommand="addx,SCREEN_WIDTH;decelerate,0.75;addx,-SCREEN_WIDTH"
+			OffCommand="linear,.3;diffusealpha,0" 
+			SongInfoMessageCommand="queuecommand,Update" 
+		/>	
+		<Layer
+			Type="ActorFrame"
+			Condition="Color() == 1 or Color() == 2 or Color() == 3 or Color() == 4 or Color() == 5 or Color() == 6 or Color() == 7 or Color() == 8 or Color() == 9 or Color() == 10 or Color() == 11 or Color() == 12"
+		><children>
+			<Quad Command="stretchto,SCREEN_LEFT,SCREEN_TOP,SCREEN_RIGHT,SCREEN_TOP+32;diffuse,#000000" />
+				<Layer
+					Type="ActorFrame"
+					EnableSelectHelpMessageCommand="%function(self)
+						if (PROFILEMAN:IsPersistentProfile(PLAYER_1) == true) or (PROFILEMAN:IsPersistentProfile(PLAYER_2) == true)
+						then
+							self:decelerate(0.3);
+							self:addy(-143);
+						else
+							self:decelerate(0.35);
+							self:addy(-38-5);
+						end
+					end"
+					SelectMenuOffMessageCommand="%function(self)
+						if (PROFILEMAN:IsPersistentProfile(PLAYER_1) == true) or (PROFILEMAN:IsPersistentProfile(PLAYER_2) == true)
+						then
+							self:accelerate(0.3);
+							self:addy(143);
+						else
+							self:decelerate(0.35);
+							self:addy(38+5);
+						end
+					end"
+				><children>
+					<Quad Command="stretchto,SCREEN_LEFT,SCREEN_BOTTOM+143,SCREEN_RIGHT,SCREEN_BOTTOM-24;diffuse,#000000"/>
+					<Quad Command="stretchto,SCREEN_LEFT,SCREEN_BOTTOM+143,SCREEN_RIGHT,SCREEN_BOTTOM-24;diffuse,#FFFFFFA0"/>
+				</children></Layer>		
+		</children></Layer>
 </children> </ActorFrame>
 

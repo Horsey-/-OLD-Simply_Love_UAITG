@@ -1,3 +1,4 @@
+<ActorFrame><children>
 <ActorFrame	OnCommand="x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;bob;EffectMagnitude,5,0,0;EffectPeriod,8"><children>
 	<ActorFrame Command="queuecommand,Set" SetCommand="%function() crazy = 0 end" />
 	<ActorFrame OnCommand="bob;EffectMagnitude,0,3,0;EffectPeriod,12"><children>
@@ -14,4 +15,18 @@
 			<Layer File="@BGShape()" InitCommand="%function(self) self:diffuse(ColorRGB(1)) end" ColorSelectedMessageCommand="%function(self) self:linear(.5) self:diffuse(ColorRGB(1)) self:diffusealpha(0.1) end" OnCommand="zoom,3;x,560;y,560;z,-300;customtexturerect,0,0,1,1;texcoordvelocity,0.03,.04;diffusealpha,0.1" />
 		</children></ActorFrame>
 	</children></ActorFrame>
+</children></ActorFrame>
+<Layer 
+  Class="Sprite" 
+  File="THEME:GetPath( EC_BGANIMATIONS, '' , '_blank.png' )"
+  OnCommand=""
+  InitCommand="queuecommand,ColorSelected" 
+  ColorSelectedMessageCommand="%function(self) 
+	 if Color() == 13 then 
+		self:Load( THEME:GetPath( EC_BGANIMATIONS, '' , 'background1.mpg' ) ) 
+	 else 
+		self:Load( THEME:GetPath( EC_BGANIMATIONS, '' , '_blank.png' ) ) 
+	 end 
+  end" 
+/> 
 </children></ActorFrame>

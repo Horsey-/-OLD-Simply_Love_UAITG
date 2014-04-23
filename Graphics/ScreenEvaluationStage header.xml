@@ -1,10 +1,15 @@
 <ActorFrame> <children>
-	<Layer File="ScreenWithMenuElements header"/>	
 	<Layer
-		Type="BitmapText"
-		Text="EVALUATION"
-		File="_wendy white"
-		OnCommand="diffuse,#FFFFFF;zoom,.4;shadowlength,0;horizalign,left;x,15;y,16"
-		OffCommand="linear,0.2;diffusealpha,0"
-	/>
+		Type="ActorFrame"
+		Condition="Color() < 13"
+	><children>
+		<Layer File="ScreenWithMenuElements header"/>	
+		<Layer
+			Type="BitmapText"
+			Text="@SelectMenuPlayerStatsLocation()"
+			File="_wendy white"
+			OnCommand="diffuse,#FFFFFF;zoom,.4;shadowlength,0;horizalign,left;x,15;y,16;maxwidth,595"
+			OffCommand="linear,0.2;diffusealpha,0"
+		/>
+	</children></Layer>
 </children> </ActorFrame>

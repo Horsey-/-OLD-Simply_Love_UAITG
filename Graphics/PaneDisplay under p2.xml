@@ -1,10 +1,15 @@
 <ActorFrame> <children>
-	<Layer Type="Quad" Command="@'diffuse,'..DifficultyColor(2)..';stretchto,-200,-10,108,45'"/>	
-	<Layer 
-		Type="Quad" 
-		Command="stretchto,-200,-10,108,45;queuecommand,Set"
-		SetCommand="%function(self) self:diffuse(BubbleColorRGB(PLAYER_2)) end" 
-		CurrentSongChangedMessageCommand="playcommand,Set" 
-		CurrentStepsP2ChangedMessageCommand="playcommand,Set" 
-	/>			
+	<Layer
+		Type="ActorFrame"
+		Condition="Color() == 1 or Color() == 2 or Color() == 3 or Color() == 4 or Color() == 5 or Color() == 6 or Color() == 7 or Color() == 8 or Color() == 9 or Color() == 10 or Color() == 11 or Color() == 12"
+	><children>
+		<Layer Type="Quad" Command="@'diffuse,'..DifficultyColor(2)..';stretchto,-200,-10,108,45'"/>	
+		<Layer 
+			Type="Quad" 
+			Command="stretchto,-200,-10,108,45;queuecommand,Set"
+			SetCommand="%function(self) self:diffuse(BubbleColorRGB(PLAYER_2)) end" 
+			CurrentSongChangedMessageCommand="playcommand,Set" 
+			CurrentStepsP2ChangedMessageCommand="playcommand,Set" 
+		/>
+	</children></Layer>
 </children> </ActorFrame>

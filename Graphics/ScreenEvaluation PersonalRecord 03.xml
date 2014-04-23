@@ -1,0 +1,14 @@
+<ActorFrame><children>
+	<BitmapText
+		Condition="Color() == 13"
+		File="_misobold small"
+		Text="Personal Record 3"
+		OnCommand="shadowlength,1"
+	/>	
+	<BitmapText
+		Condition="Color() < 13"
+		File="_wendy small"
+		Text="Personal Record 3"
+		OnCommand="shadowlength,0"
+	/>
+</children></ActorFrame>

@@ -1,24 +1,46 @@
 <ActorFrame> <children>
-
 	<Layer File="../ScreenOptions overlay" />
-
+<!-- SL items -->
 	<Layer
-		Condition="GAMESTATE:IsPlayerEnabled(PLAYER_1)"
-		Font="_wendy small"
-		Text="P1 Scroll Rate"
-		Command="@'diffuse,' .. PlayerColor(PLAYER_1) .. ';ShadowLength,0;horizalign,left;zoom,0.5;x,SCREEN_CENTER_X-290;y,57;queuecommand,Update'"
-		SpeedModChangedMessageCommand="queuecommand,Update"
-		UpdateCommand="%function(self) self:settext('P1: '..DisplaySpeedMod(1)) end"
-		OffCommand="zoom,0"
-	/>
+		Type="ActorFrame"
+		Condition="Color() < 13"
+	><children>
+		<Layer
+			Condition="GAMESTATE:IsPlayerEnabled(PLAYER_1)"
+			Font="_wendy small"
+			Text="P1 Scroll Rate"
+			Command="@'diffuse,' .. PlayerColor(PLAYER_1) .. ';ShadowLength,0;horizalign,left;zoom,0.5;x,SCREEN_CENTER_X-290;y,57;queuecommand,Update'"
+			SpeedModChangedMessageCommand="queuecommand,Update"
+			UpdateCommand="%function(self) self:settext('P1: '..DisplaySpeedMod(1)) end"
+			OffCommand="zoom,0"
+		/>
+		<Layer
+			Condition="GAMESTATE:IsPlayerEnabled(PLAYER_2)"
+			Font="_wendy small"
+			Text="P2 Scroll Rate"
+			Command="@'diffuse,' .. PlayerColor(PLAYER_2) .. ';ShadowLength,0;horizalign,right;zoom,0.5;x,SCREEN_CENTER_X+290;y,57;queuecommand,Update'"
+			SpeedModChangedMessageCommand="queuecommand,Update"
+			UpdateCommand="%function(self) self:settext('P2: '..DisplaySpeedMod(2)) end"
+			OffCommand="zoom,0"
+		/>
+	</children></Layer>
 	<Layer
-		Condition="GAMESTATE:IsPlayerEnabled(PLAYER_2)"
-		Font="_wendy small"
-		Text="P2 Scroll Rate"
-		Command="@'diffuse,' .. PlayerColor(PLAYER_2) .. ';ShadowLength,0;horizalign,right;zoom,0.5;x,SCREEN_CENTER_X+290;y,57;queuecommand,Update'"
-		SpeedModChangedMessageCommand="queuecommand,Update"
-		UpdateCommand="%function(self) self:settext('P2: '..DisplaySpeedMod(2)) end"
-		OffCommand="zoom,0"
-	/>
-	
-</children> </ActorFrame>
+		Type="ActorFrame"
+		Condition="not GAMESTATE:IsCourseMode() and Color() == 13"
+		OnCommand="addx,-SCREEN_WIDTH;decelerate,0.3;addx,SCREEN_WIDTH"
+	><children>
+	<!-- song name text -->
+		<BitmapText
+			Text="0"
+			Condition="not GAMESTATE:IsCourseMode()"
+			File="_misobold white"
+			OnCommand="shadowlength,2;horizalign,center;maxwidth,508;zoom,0.40"
+			InitCommand="%function(self)
+					self:settext(GAMESTATE:GetCurrentSong():GetDisplayMainTitle());
+					self:x(SCREEN_CENTER_X+1);
+					self:y(SCREEN_CENTER_Y-229+1);
+				end"
+			OffCommand="accelerate,0.3;addx,SCREEN_WIDTH"
+		/>
+	</children></Layer>
+</children></ActorFrame>

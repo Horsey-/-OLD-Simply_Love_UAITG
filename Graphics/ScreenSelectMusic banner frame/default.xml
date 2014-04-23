@@ -1,0 +1,88 @@
+<ActorFrame>
+	<children>
+			<!--
+			
+			removed the bottombar graphic file here because of layering issues with the song stats pane/bubble; moved to ~BGAnimations\ScreenSelectMusic overlay\default.xml
+			
+			<Layer
+				File="bottombar"
+				OnCommand="y,359;addx,-124;decelerate,0.75;addy,-50" 
+				OffCommand="accelerate,0.75;addy,50"
+				EnableSelectHelpMessageCommand="decelerate,0.3;addy,-120"
+				SelectMenuOffMessageCommand="accelerate,0.3;addy,120"
+			/>
+			
+			-->
+	<Layer Class="ActorFrame"  Condition="Color() == 13"><children>
+		<ActorFrame 
+			FOV="58"
+			OnCommand="x,-10;y,2;addx,SCREEN_WIDTH;decelerate,0.75;addx,-SCREEN_WIDTH"
+			OffCommand="accelerate,0.75;addx,SCREEN_WIDTH" 
+		>
+			<children>
+				<AutoActor 
+					File="right frame edge"
+					OnCommand="x,-199;y,5;horizalign,left;zoomx,1"
+					 
+				/>
+			</children>
+		</ActorFrame>
+		<ActorFrame 
+			OnCommand="y,1;addx,SCREEN_WIDTH;decelerate,0.75;addx,-SCREEN_WIDTH" 
+			OffCommand="accelerate,0.75;addx,SCREEN_WIDTH" 
+		>
+			<children>
+				<BitmapText
+					Text="Artist:"
+					Font="_eurostile normal"
+					OnCommand="ShadowLength,2;zoom,0.5;x,-150;y,-38;DiffuseAlpha,0.5"
+				/>				
+				<BitmapText
+					Text="BPM:"
+					File="_eurostile normal"
+					OnCommand="ShadowLength,2;zoom,0.5;x,-154;y,-57;DiffuseAlpha,0.5"
+				/>
+				<BitmapText
+					Text="Rank:"
+					File="_eurostile normal"
+					OnCommand="ShadowLength,2;zoom,0.5;x,-25;y,-57;DiffuseAlpha,0.5"
+				/>
+				
+				<BitmapText
+					Text="Length:"
+					File="_eurostile normal"
+					OnCommand="ShadowLength,2;zoom,0.5;x,80;y,-57;DiffuseAlpha,0.5"
+				/>
+				
+	<!-- the folder code doesn't work in course mode, so it shouldn't be displayed at all -->
+				
+				<BitmapText
+					Text="Folder:"
+					Condition="not GAMESTATE:IsCourseMode()"
+					File="_eurostile normal"
+					OnCommand="ShadowLength,2;zoom,0.5;zoomx,.46;x,-150;y,-19;DiffuseAlpha,0.5"
+				/>
+	<!-- display song directory; lua code in ~/scripts required for update command -->
+				<BitmapText
+					Text=""
+					File="_misoreg small"
+					OnCommand="x,-126;y,-20-8;ShadowLength,2"
+					InitCommand="%function(self)
+						self:zoom(0.6);
+						self:maxwidth(530);
+						self:shadowlength(1);
+						self:horizalign('left');
+					end"
+					CurrentSongChangedMessageCommand="queuecommand,Update"
+					UpdateCommand="%SSMSongLocText"
+				/>
+			</children>
+		</ActorFrame>
+		<AutoActor 
+			File="left frame"
+			OnCommand="x,-437;y,7;addx,-SCREEN_WIDTH;decelerate,0.5;addx,SCREEN_WIDTH"
+			OffCommand="sleep,0.2;accelerate,0.6;addx,-SCREEN_WIDTH"
+		/>
+	</children></Layer>
+	</children>
+</ActorFrame>

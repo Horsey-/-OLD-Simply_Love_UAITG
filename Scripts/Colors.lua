@@ -60,6 +60,16 @@ function BubbleColorRGB ( pn )
 	return 1,1,1,1
 end
 
+function BubbleColorLabelRGB ( pn )
+	if GAMESTATE:IsPlayerEnabled( pn ) then
+		local steps = GAMESTATE:GetCurrentSteps( pn )
+		if not steps then return 1,1,1,0 end
+		steps = steps:GetDifficulty()
+		return 0,0,0,1
+	end
+	return 1,1,1,1
+end
+
 function DifficultyColorRGB( n ) if n < 5 then return ColorRGB( n - 2 ) else return 0.71,0.72,0.73,1 end end
 
 function ColorRGB ( n )

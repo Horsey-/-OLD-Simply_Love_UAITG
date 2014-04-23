@@ -1,0 +1,3 @@
+[Sprite]
+Texture=MenuElements icon techno single8 2x1.png
+InitCommand=%function(self) if Color() == 13 then self:Load(Path('Graphics','MusicWheel highlight13 (res 351x54)')) else self:Load(Path('Graphics','MusicWheel highlightSL (res 390x30)')) end end

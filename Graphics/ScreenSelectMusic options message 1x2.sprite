@@ -1,0 +1,3 @@
+[Sprite]
+Texture=_blank.png
+InitCommand=%function(self) if Color() == 13 then self:Load(Path('Graphics','ScreenSelectMusic options13 message 1x2.png')) else self:Load(Path('Graphics','ScreenSelectMusic options messageSL 1x2')) end end

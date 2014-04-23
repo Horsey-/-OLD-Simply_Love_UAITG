@@ -3,8 +3,7 @@
 	<ActorFrame Command="%GameplayInit" FirstUpdateCommand="%Gameplay" UpdateCommand="%GameplayUpdate"/>
 	<Layer Type="ActorFrame"
 		OnCommand="x,SCREEN_CENTER_X;y,SCREEN_TOP+20"
-		> <children>
-
+		> <children>		
 		<Layer 
 			Type="SongMeterDisplay" 
 			StreamWidth="300" 

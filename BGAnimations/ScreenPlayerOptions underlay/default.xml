@@ -1,0 +1,119 @@
+<ActorFrame> <children>
+	<Layer 
+		Type="Quad"
+		Condition="Color() < 13"
+		Command="diffuse,#1E282F66;stretchto,SCREEN_CENTER_X-310,438,SCREEN_CENTER_X+310,388"
+		OffCommand="linear,0.3;diffusealpha,0"
+	/>
+	<Layer 
+		File="13Background.png"
+		Condition="Color() == 13"
+		OnCommand="%function(self)
+			self:x(SCREEN_CENTER_X);
+			self:y(SCREEN_CENTER_Y+55);
+			self:addx(-SCREEN_WIDTH);
+			self:decelerate(0.3);
+			self:addx(SCREEN_WIDTH);
+		end"
+		OffCommand="accelerate,0.3;addx,SCREEN_WIDTH"
+	/>	
+	<Layer 
+		File="SLBackground.png"
+		Condition="Color() < 13"
+		OnCommand="%function(self)
+			self:x(SCREEN_CENTER_X);
+			self:y(SCREEN_CENTER_Y);
+		end"
+		OffCommand="linear,0.3;diffusealpha,0"
+	/>
+<!-- Theme 13 -->
+	<Layer
+		Type="ActorFrame"
+		Condition="Color() == 13"
+	><children>	
+	<Layer
+		Type="ActorFrame"
+		OnCommand="addx,-SCREEN_WIDTH*3/4;sleep,0.1;decelerate,0.3;addx,SCREEN_WIDTH*3/4"
+		OffCommand="accelerate,0.3;addx,SCREEN_WIDTH"
+	><children>
+	<!-- speed mod bubble P1 -->
+		<Layer
+			Condition="GAMESTATE:IsPlayerEnabled(PLAYER_1)"
+			File="bubble.png"
+			OnCommand="ShadowLength,0;horizalign,left;x,SCREEN_CENTER_X-325;y,106"
+		/>
+	<!-- speed mod text P1 -->
+		<Layer
+			Condition="GAMESTATE:IsPlayerEnabled(PLAYER_1)"
+			Font="_misobold white"
+			Text="0"
+			OnCommand="@'diffuse,' .. PlayerColor(PLAYER_1) .. ';ShadowLength,2;horizalign,center;zoom,0.5;x,SCREEN_CENTER_X-222;y,99;maxwidth,326;queuecommand,Update'"
+			SpeedModChangedMessageCommand="queuecommand,Update"
+			UpdateCommand="%function(self) self:settext('P1: '..DisplaySpeedMod(1)) end"
+		/>
+	</children></Layer>
+	<Layer
+		Type="ActorFrame"
+		OnCommand="addx,SCREEN_WIDTH*3/4;sleep,0.1;decelerate,0.3;addx,-SCREEN_WIDTH*3/4"
+		OffCommand="accelerate,0.3;addx,SCREEN_WIDTH"
+	><children>
+	<!-- speed mod bubble P2 -->
+		<Layer
+			Condition="GAMESTATE:IsPlayerEnabled(PLAYER_2)"
+			File="bubble.png"
+			OnCommand="ShadowLength,0;horizalign,left;x,SCREEN_CENTER_X+120;y,106"
+		/>
+	<!-- speed mod text P2 -->
+		<Layer
+			Condition="GAMESTATE:IsPlayerEnabled(PLAYER_2)"
+			Font="_misobold white"
+			Text="P2 Scroll Rate"
+			Command="@'diffuse,' .. PlayerColor(PLAYER_2) .. ';ShadowLength,2;horizalign,center;zoom,0.5;x,SCREEN_CENTER_X+224;y,99;maxwidth,326;queuecommand,Update'"
+			SpeedModChangedMessageCommand="queuecommand,Update"
+			UpdateCommand="%function(self) self:settext('P2: '..DisplaySpeedMod(2)) end"
+		/>
+	</children></Layer>
+	<!-- song banner outline -->
+		<Layer
+			File="outline.png"
+			InitCommand="scaletoclipped,418,167;zoom,0.60;zoomy,0.62;zoomx,0.61;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;addy,-157-2+1"
+			OnCommand="addx,-SCREEN_WIDTH;decelerate,0.3;addx,SCREEN_WIDTH"
+			OffCommand="accelerate,0.3;addx,SCREEN_WIDTH"
+		/>
+	<!-- song banner -->
+		<Layer
+			Condition="not GAMESTATE:IsCourseMode()"
+			File="@'../ScreenSelectMusic underlay/Banner'..Color()..'.png'"
+			InitCommand="scaletoclipped,418,164;zoom,0.60;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;addy,-158"
+			OnCommand="addx,-SCREEN_WIDTH;decelerate,0.3;addx,SCREEN_WIDTH"
+			OffCommand="accelerate,0.3;addx,SCREEN_WIDTH"
+		/>
+		<Layer
+			Condition="not GAMESTATE:IsCourseMode()"
+			File="songbanner"
+			InitCommand="scaletoclipped,418,164;zoom,0.60;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;addy,-158"
+			OnCommand="addx,-SCREEN_WIDTH;decelerate,0.3;addx,SCREEN_WIDTH"
+			OffCommand="accelerate,0.3;addx,SCREEN_WIDTH"
+		/>
+		<Layer
+			Condition="GAMESTATE:IsCourseMode()"
+			File="coursebanner"
+			InitCommand="scaletoclipped,418,164;zoom,0.59;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;addy,-158"
+			OnCommand="addx,-SCREEN_WIDTH;decelerate,0.3;addx,SCREEN_WIDTH"
+			OffCommand="accelerate,0.3;addx,SCREEN_WIDTH"
+		/>
+	<!-- song bubble -->
+		<Layer
+			Type="ActorFrame"
+			Condition="not GAMESTATE:IsCourseMode()"
+			OnCommand="addx,-SCREEN_WIDTH;decelerate,0.3;addx,SCREEN_WIDTH"
+		><children>
+			<Layer
+				File="titlebubble13.png"
+				InitCommand="x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-218-2;zoomy,0.9
+				"
+				OffCommand="accelerate,0.3;addx,SCREEN_WIDTH"
+			/>
+		</children></Layer>
+	</children></Layer>
+</children></ActorFrame> 

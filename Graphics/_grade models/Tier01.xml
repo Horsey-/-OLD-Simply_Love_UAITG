@@ -1,34 +1,59 @@
 <ActorFrame>
 	<children>
- 
-<!--top left-->
-		<Actor
-			File="star.png"
-			OnCommand="x,-46;y,-46;zoom,0.5;pulse;EffectMagnitude,1,0.9,0;sleep,60;queuecommand,Spin"
-			SpinCommand="%function(self) speed = GAMESTATE:GetEnv('SpinSpeed'); if not speed then speed = 0 end; GAMESTATE:SetEnv('SpinSpeed',speed + 1) Spin(self) end"
-		/>
- 
-<!--top right-->                       
-		<Actor
-			File="star.png"
-			OnCommand="x,46;y,-46;zoom,0.5;effectoffset,0.2;pulse;EffectMagnitude,0.9,1,0;sleep,3;queuecommand,Spin"
-			SpinCommand="%function(self) Spin(self) end"
-		/>
-               
-<!--bottom left-->             
-		<Actor
-			File="star.png"
-			OnCommand="x,-46;y,46;zoom,0.5;effectoffset,0.4;pulse;EffectMagnitude,0.9,1,0;sleep,11;queuecommand,Spin"
-			SpinCommand="%function(self) Spin(self) end"
-		/>
-               
-<!--bottom right-->            
-		<Actor
-			File="star.png"
-			OnCommand="x,46;y,46;zoom,0.5;effectoffset,0.6;pulse;EffectMagnitude,1,0.9,0;sleep,48;queuecommand,Spin"
-			SpinCommand="%function(self) Spin(self) end"
-		/>             
-               
-               
+	<!-- Theme 13 Quad Grade -->
+		<Layer
+			Type="ActorFrame"
+			Condition="Color() == 13"
+		><children>
+			<Actor
+				File="star1.txt"
+				OnCommand="x,-25;y,-22;zoom,0.5;wag;EffectMagnitude,0,4,10"
+			/>
+			<Actor
+				File="star2.txt"
+				OnCommand="x,25;y,-22;zoom,0.5;wag;EffectMagnitude,0,4,10"
+			/>
+			<Actor
+				File="star3.txt"
+				OnCommand="x,-25;y,22;zoom,0.5;wag;EffectMagnitude,0,4,10"
+			/>
+			<Actor
+				File="star4.txt"
+				OnCommand="x,25;y,22;zoom,0.5;wag;EffectMagnitude,0,4,10"
+			/>
+		</children></Layer>
+	<!-- SL Quad Grade -->
+		<Layer
+			Type="ActorFrame"
+			Condition="Color() < 13"
+		><children>
+	<!--top left-->
+			<Actor
+				File="star.png"
+				OnCommand="x,-46;y,-46;zoom,0.5;pulse;EffectMagnitude,1,0.9,0;sleep,60;queuecommand,Spin"
+				SpinCommand="%function(self) speed = GAMESTATE:GetEnv('SpinSpeed'); if not speed then speed = 0 end; GAMESTATE:SetEnv('SpinSpeed',speed + 1) Spin(self) end"
+			/>
+	 
+	<!--top right-->                       
+			<Actor
+				File="star.png"
+				OnCommand="x,46;y,-46;zoom,0.5;effectoffset,0.2;pulse;EffectMagnitude,0.9,1,0;sleep,3;queuecommand,Spin"
+				SpinCommand="%function(self) Spin(self) end"
+			/>
+				   
+	<!--bottom left-->             
+			<Actor
+				File="star.png"
+				OnCommand="x,-46;y,46;zoom,0.5;effectoffset,0.4;pulse;EffectMagnitude,0.9,1,0;sleep,11;queuecommand,Spin"
+				SpinCommand="%function(self) Spin(self) end"
+			/>
+				   
+	<!--bottom right-->            
+			<Actor
+				File="star.png"
+				OnCommand="x,46;y,46;zoom,0.5;effectoffset,0.6;pulse;EffectMagnitude,1,0.9,0;sleep,48;queuecommand,Spin"
+				SpinCommand="%function(self) Spin(self) end"
+			/>     
+		</children></Layer>
 	</children>
 </ActorFrame>

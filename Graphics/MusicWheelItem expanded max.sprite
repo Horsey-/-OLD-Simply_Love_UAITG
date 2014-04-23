@@ -1,0 +1,3 @@
+[Sprite]
+Texture=_blank.png
+InitCommand=%function(self) if Color() == 13 then self:Load(Path('Graphics','MusicWheelItem13 expanded (res 351x49)')) else self:Load(Path('Graphics','MusicWheelItemSL expanded (res 390x30)')) end end

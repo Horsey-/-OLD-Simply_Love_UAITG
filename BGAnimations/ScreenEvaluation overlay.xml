@@ -1,3 +1,14 @@
+<!-- what is contained here: 
+
+-addy value to push down elements on the screen elements at line ~31
+-song name quad
+-rate mod quad
+-song name and rate mod text
+-difficulty icon and text P1/P2
+
+-->
+
+
 <ActorFrame> <children>
 	<Layer
 		Type="ActorFrame"
@@ -14,43 +25,87 @@
 
 
 	</children></Layer>
-	<Layer 
-		Type="Quad"
-		OnCommand="diffuse,#1E282F;stretchto,SCREEN_CENTER_X-139,41,SCREEN_CENTER_X+139,61;diffusealpha,0.85"
-	/>	
-	
-	<Layer 
-		Condition="modRate ~= 1"
-		Type="Quad"
-		OnCommand="diffuse,#1E282F;stretchto,SCREEN_CENTER_X-139,153,SCREEN_CENTER_X+139,170;diffusealpha,0.85"
-	/>	
-	<Layer Type="ActorFrame"
-		Condition="not (GAMESTATE:GetCurrentSong() == SONGMAN:FindSong('In The Groove/Training1/'))"
-		OnCommand="x,SCREEN_CENTER_X;y,SCREEN_TOP+68"
-		> <children>
-
+<!-- addy value to better centre elements for theme 13 -->
+	<Layer
+		Type="ActorFrame"
+		InitCommand="%function(self)
+			if Color() == 13 then
+				self:addy(-39)
+			else end
+		end"
+	><children>	
 		<Layer
-			Type="BitmapText"
-			Font="_misobold small"
-			OnCommand="shadowlength,1;maxwidth,500;y,-24;zoom,.55;diffuse,#FFFFFF"
-			InitCommand="animate,0;queuecommand,Update"
-			CurrentSongChangedMessageCommand="queuecommand,Update"
-			UpdateCommand="%function(self) self:settext(GetSongName()) end"
-		/>
-		<Layer 
-			Type="BitmapText"
-			Font="_misobold small"
-			OnCommand="y,87;zoom,.5;shadowlength,1;diffuse,#FFFFFF"
-			InitCommand="animate,0;playcommand,Update"
-			UpdateCommand="%function(self) RateBPMlabel(self) end"
-		/>
-	</children> </Layer>
-
+			Type="ActorFrame"
+			OnCommand="%function(self)
+				if Color() == 13 then 
+					self:addx(-2*EvalTweenDistance()); 
+					self:sleep(3); 
+					self:decelerate(0.3); 
+					self:addx(2*EvalTweenDistance()); 
+				else end
+			end"
+			OffCommand="%function(self) 
+				if Color() == 13 then 
+					self:accelerate(0.3); 
+					self:addx(-2*EvalTweenDistance());
+				else end 
+			end"
+		><children>	
+			<!-- song name quad -->
+			<Layer 
+				Type="Quad"
+				OnCommand="diffuse,#1E282F;stretchto,SCREEN_CENTER_X-139,41,SCREEN_CENTER_X+139,61;diffusealpha,0.85"
+			/>	
+			<!-- rate mod quad -->
+			<Layer 
+				Condition="modRate ~= 1"
+				Type="Quad"
+				OnCommand="diffuse,#1E282F;stretchto,SCREEN_CENTER_X-139,153,SCREEN_CENTER_X+139,170;diffusealpha,0.85"
+			/>	
+			<!-- song name and rate mod text -->
+			<Layer Type="ActorFrame"
+				Condition="not (GAMESTATE:GetCurrentSong() == SONGMAN:FindSong('In The Groove/Training1/'))"
+				OnCommand="x,SCREEN_CENTER_X;y,SCREEN_TOP+68"
+				><children>
+				<Layer
+					Type="BitmapText"
+					Font="_misobold small"
+					OnCommand="shadowlength,1;maxwidth,500;y,-24;zoom,.55;diffuse,#FFFFFF"
+					InitCommand="animate,0;queuecommand,Update"
+					CurrentSongChangedMessageCommand="queuecommand,Update"
+					UpdateCommand="%function(self) self:settext(GetSongName()) end"
+				/>
+				<Layer 
+					Type="BitmapText"
+					Font="_misobold small"
+					OnCommand="y,87;zoom,.5;shadowlength,1;diffuse,#FFFFFF"
+					InitCommand="animate,0;playcommand,Update"
+					UpdateCommand="%function(self) RateBPMlabel(self) end"
+				/>
+			</children></Layer>			
+		</children></Layer>
+<!-- difficulty icon and difficulty text P1-->
 	<Layer Type="ActorFrame"
 		Condition="GAMESTATE:IsPlayerEnabled(PLAYER_1)"
-		OnCommand="x,SCREEN_CENTER_X-295;y,SCREEN_CENTER_Y-76"
-	> <children>
+		OnCommand="%function(self)
+			self:x(SCREEN_CENTER_X-295);
+			self:y(SCREEN_CENTER_Y-76);
+			if Color() == 13 then 
+				self:addx(-EvalTweenDistance()); 
+				self:sleep(3); 
+				self:decelerate(0.3); 
+				self:addx(EvalTweenDistance()); 
+			else end
+		end"
+		OffCommand="%function(self) 
+			if Color() == 13 then 
+				self:accelerate(0.3); 
+				self:addx(-EvalTweenDistance());
+			else end 
+		end"
+	><children>
 		<Actor
+			Condition="Color() < 13"
 			File="@THEME:GetPath(EC_GRAPHICS,'','_difficulty icons')"
 			InitCommand="%function(self) self:y(IconY()) IconCrop(self) end"
 			OnCommand="animate,0;playcommand,Update"
@@ -60,28 +115,71 @@
 			Class="DifficultyMeter"
 			Type="ScreenGameplay DifficultyMeterP1"
 			OnCommand="playcommand,Update"
-			UpdateCommand="%function(self) 
-					if GAMESTATE:GetCurrentTrail(PLAYER_1) then 
-						self:SetFromTrail(GAMESTATE:GetCurrentTrail(PLAYER_1)) 
-					else
-						self:SetFromSteps(GAMESTATE:GetCurrentSteps(PLAYER_1))
-					end
-				end"
+			UpdateCommand="%function(self)
+				if Color() == 13 then
+					self:shadowlength(2);
+					self:addy(-10);
+					self:horizalign('center');
+				else
+					self:shadowlength(0);
+				end
+				if GAMESTATE:GetCurrentTrail(PLAYER_1) then 
+					self:SetFromTrail(GAMESTATE:GetCurrentTrail(PLAYER_1)) 
+				else
+					self:SetFromSteps(GAMESTATE:GetCurrentSteps(PLAYER_1))
+				end
+			end"
 		/>
 		<Layer 
 			Condition="not GAMESTATE:IsCourseMode()"
 			Font="_misobold small"
 			Text="???" 
-			OnCommand="x,25;zoom,0.4;shadowlength,0;horizalign,left;maxwidth,240;queuecommand,Set" 
-			SetCommand="%function(self) self:settext(GetStepsDescriptionText(PLAYER_1)) end" 
-		/>		
+			OnCommand="%function(self)
+				self:addy(-6);
+				self:zoom(0.4);
+				self:maxwidth(240);
+				self:queuecommand('Set')
+				if Color() == 13 then
+					self:x(67);
+					self:addy(1)
+					self:shadowlength(2);
+					self:addy(-10);
+					self:diffuse(BubbleColorText(PLAYER_1));
+					self:horizalign('center');
+				else
+					self:x(25);
+					self:shadowlength(0);
+					self:horizalign('left');
+				end
+			end" 
+			SetCommand="%function(self) 
+				self:settext(GetStepsDescriptionText(PLAYER_1)) 
+			end"
+			RecentreStepsP1MessageCommand="addy,6"
+		/>	
 	</children> </Layer>
-
+<!-- difficulty icon and difficulty text P2 -->
 	<Layer Type="ActorFrame"
 		Condition="GAMESTATE:IsPlayerEnabled(PLAYER_2)"
-		OnCommand="x,SCREEN_CENTER_X+295;y,SCREEN_CENTER_Y-76"
-	> <children>
+		OnCommand="%function(self)
+			self:x(SCREEN_CENTER_X+295);
+			self:y(SCREEN_CENTER_Y-76);
+			if Color() == 13 then 
+				self:addx(EvalTweenDistance()); 
+				self:sleep(3); 
+				self:decelerate(0.3); 
+				self:addx(-EvalTweenDistance()); 
+			else end
+		end"
+		OffCommand="%function(self) 
+			if Color() == 13 then 
+				self:accelerate(0.3); 
+				self:addx(EvalTweenDistance());
+			else end 
+		end"
+	><children>
 		<Actor
+			Condition="Color() < 13"
 			File="@THEME:GetPath(EC_GRAPHICS,'','_difficulty icons')"
 			InitCommand="%function(self) self:y(IconY()) IconCrop(self) end"
 			OnCommand="animate,0;playcommand,Update"
@@ -91,20 +189,48 @@
 			Class="DifficultyMeter"
 			Type="ScreenGameplay DifficultyMeterP2"
 			OnCommand="playcommand,Update"
-			UpdateCommand="%function(self) 
-					if GAMESTATE:GetCurrentTrail(PLAYER_2) then 
-						self:SetFromTrail(GAMESTATE:GetCurrentTrail(PLAYER_2)) 
-					else
-						self:SetFromSteps(GAMESTATE:GetCurrentSteps(PLAYER_2))
-					end
-				end"
+			UpdateCommand="%function(self)
+				if Color() == 13 then
+					self:shadowlength(1);
+					self:addy(-10);
+					self:horizalign('center');
+				else
+					self:shadowlength(0);
+				end
+				if GAMESTATE:GetCurrentTrail(PLAYER_2) then 
+					self:SetFromTrail(GAMESTATE:GetCurrentTrail(PLAYER_2)) 
+				else
+					self:SetFromSteps(GAMESTATE:GetCurrentSteps(PLAYER_2))
+				end
+			end"
 		/>
 		<Layer 
 			Condition="not GAMESTATE:IsCourseMode()"
 			Font="_misobold small"
 			Text="???" 
-			OnCommand="x,-25;zoom,0.4;shadowlength,0;horizalign,right;maxwidth,240;queuecommand,Set" 
-			SetCommand="%function(self) self:settext(GetStepsDescriptionText(PLAYER_2)) end" 
-		/>
+			OnCommand="%function(self)
+				self:addy(-6);
+				self:zoom(0.4);
+				self:maxwidth(240);
+				self:queuecommand('Set')
+				if Color() == 13 then
+					self:x(-67);
+					self:addy(1)
+					self:shadowlength(1);
+					self:addy(-10);
+					self:diffuse(BubbleColorText(PLAYER_1));
+					self:horizalign('center');
+				else
+					self:x(-25);
+					self:shadowlength(0);
+					self:horizalign('right');
+				end
+			end" 
+			SetCommand="%function(self) 
+				self:settext(GetStepsDescriptionText(PLAYER_2)) 
+			end"
+			RecentreStepsP2MessageCommand="addy,6"
+		/> 
+	</children> </Layer>	
 	</children> </Layer>
 </children> </ActorFrame>
