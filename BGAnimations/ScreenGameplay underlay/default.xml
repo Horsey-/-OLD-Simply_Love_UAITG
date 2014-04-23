@@ -1,0 +1,165 @@
+<ActorFrame> <children>
+	<Layer Type="Quad" Command="diffuse,#00000080;stretchto,SCREEN_LEFT,SCREEN_TOP,SCREEN_RIGHT,80"/>
+	<Layer Condition="GAMESTATE:GetEnv('modFilter1') == '1'" Type="Quad" Command="Stretchto,SCREEN_CENTER_X-320,0,SCREEN_CENTER_X,480;diffuse,0,0,0,1" />
+	<Layer Condition="GAMESTATE:GetEnv('modFilter2') == '1'" Type="Quad" Command="Stretchto,SCREEN_CENTER_X+320,0,SCREEN_CENTER_X,480;diffuse,0,0,0,1" />
+	<Layer Condition="(not GAMESTATE:IsPlayerEnabled(PLAYER_2) and GAMESTATE:GetEnv('modFilter1') == '1') or (not GAMESTATE:IsPlayerEnabled(PLAYER_1) and GAMESTATE:GetEnv('modFilter2') == '1')" Type="Quad" Command="Stretchto,SCREEN_CENTER_X-320,0,SCREEN_CENTER_X+320,480;diffuse,0,0,0,1" />
+		
+	<ActorFrame 
+		Condition="GAMESTATE:GetPlayMode()==PLAY_MODE_REGULAR and GAMESTATE:GetEasiestStepsDifficulty()==DIFFICULTY_BEGINNER and PREFSMAN:GetPreference('MercifulBeginner')"
+		OnCommand="x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-30" 
+	><children>
+		<Layer
+			Class="AutoActor"
+			File="light_frame"
+		/>
+		<Layer
+			Class="AutoActor"
+			File="light_green"
+			OnCommand="y,-94;diffusealpha,0;rotationz,0;blend,add"
+			NoteCrossedMessageCommand="finishtweening;diffusealpha,1;zoom,1.2;linear,0.2;zoom,1;diffusealpha,0"
+		/>
+		<Layer
+			Class="AutoActor"
+			File="light_yellow"
+			OnCommand="y,-31;diffusealpha,0;rotationz,45;blend,add"
+			NoteWillCrossIn500MsMessageCommand="finishtweening;diffusealpha,1;zoom,1.2;linear,0.2;zoom,1;diffusealpha,0"
+		/>
+		<Layer
+			Class="AutoActor"
+			File="light_yellow"
+			OnCommand="y,32;diffusealpha,0;rotationz,90;blend,add"
+			NoteWillCrossIn1000MsMessageCommand="finishtweening;diffusealpha,1;zoom,1.2;linear,0.2;zoom,1;diffusealpha,0"
+		/>
+		<Layer
+			Class="AutoActor"
+			File="light_red"
+			OnCommand="y,95;diffusealpha,0;rotationz,135;blend,add"
+			NoteWillCrossIn1500MsMessageCommand="finishtweening;diffusealpha,1;zoom,1.2;linear,0.2;zoom,1;diffusealpha,0"
+		/>
+		<Layer
+			Class="BitmapText"
+			Font="_misobold small"
+			Text="left!"
+			OnCommand="shadowlength,0;y,-106;diffusealpha,0;maxwidth,70"
+			NoteCrossedLeftMessageCommand="finishtweening;diffusealpha,1;zoom,1.4;linear,0.2;zoom,1;sleep,0.4;diffusealpha,0"
+			NoteCrossedJumpMessageCommand="finishtweening;diffusealpha,0"
+		/>
+		<Layer
+			Class="BitmapText"
+			Font="_misobold small"
+			Text="right!"
+			OnCommand="shadowlength,0;y,-106;diffusealpha,0;maxwidth,70"
+			NoteCrossedRightMessageCommand="finishtweening;diffusealpha,1;zoom,1.4;linear,0.2;zoom,1;sleep,0.4;diffusealpha,0"
+			NoteCrossedJumpMessageCommand="finishtweening;diffusealpha,0"
+		/>
+		<Layer
+			Class="BitmapText"
+			Font="_misobold small"
+			Text="up!"
+			OnCommand="shadowlength,0;y,-106;diffusealpha,0;maxwidth,70"
+			NoteCrossedUpMessageCommand="finishtweening;diffusealpha,1;zoom,1.4;linear,0.2;zoom,1;sleep,0.4;diffusealpha,0"
+			NoteCrossedJumpMessageCommand="finishtweening;diffusealpha,0"
+		/>
+		<Layer
+			Class="BitmapText"
+			Font="_misobold small"
+			Text="down!"
+			OnCommand="shadowlength,0;y,-106;diffusealpha,0;maxwidth,70"
+			NoteCrossedDownMessageCommand="finishtweening;diffusealpha,1;zoom,1.4;linear,0.2;zoom,1;sleep,0.4;diffusealpha,0"
+			NoteCrossedJumpMessageCommand="finishtweening;diffusealpha,0"
+		/>
+		<Layer
+			Class="BitmapText"
+			Font="_misobold small"
+			Text="Jump!"
+			OnCommand="shadowlength,0;y,-106;diffusealpha,0;maxwidth,70"
+			NoteCrossedJumpMessageCommand="finishtweening;diffusealpha,1;zoom,1.4;linear,0.2;zoom,1;sleep,0.4;diffusealpha,0"
+		/>
+		<Layer
+			Class="AutoActor"
+			File="light_dot"
+			OnCommand="diffusealpha,0"
+			NoteWillCrossIn500MsMessageCommand="finishtweening;y,-32;diffusealpha,0.5;linear,0.5;addy,-64;sleep,0.01;diffusealpha,0"
+		/>
+		<Layer
+			Class="AutoActor"
+			File="light_dot"
+			OnCommand="diffusealpha,0"
+			NoteWillCrossIn1000MsMessageCommand="finishtweening;y,32;diffusealpha,0.5;linear,0.5;addy,-64;sleep,0.01;diffusealpha,0"
+		/>
+		<Layer
+			Class="AutoActor"
+			File="light_dot"
+			OnCommand="diffusealpha,0"
+			NoteWillCrossIn1500MsMessageCommand="finishtweening;y,96;diffusealpha,0.5;linear,0.5;addy,-64;sleep,0.01;diffusealpha,0"
+		/>
+	</children></ActorFrame>
+	
+	<ActorFrame
+		Condition="GAMESTATE:IsHumanPlayer(PLAYER_1) and GAMESTATE:GetPlayMode()==PLAY_MODE_REGULAR and GAMESTATE:GetCurrentSteps(PLAYER_1):GetDifficulty()==DIFFICULTY_BEGINNER  and PREFSMAN:GetPreference('MercifulBeginner')"
+		OnCommand="x,SCREEN_CENTER_X-160;y,SCREEN_CENTER_Y+40;rotationx,-20"
+		FOV="45"
+		VanishX="SCREEN_CENTER_X-160"
+		VanishY="SCREEN_CENTER_Y+40"
+	><children>
+		<AutoActor
+			File="platform"
+			OnCommand="diffuse,0.6,0.6,0.6,0.8"
+		/>
+		<AutoActor
+			File="panelglow"
+			OnCommand="x,-53;blend,add;diffusealpha,0"
+			NoteCrossedLeftMessageCommand="finishtweening;diffusealpha,1;linear,0.3;zoom,1;diffusealpha,0"
+		/>
+		<AutoActor
+			File="panelglow"
+			OnCommand="x,+53;blend,add;diffusealpha,0"
+			NoteCrossedRightMessageCommand="finishtweening;diffusealpha,1;linear,0.3;zoom,1;diffusealpha,0"
+		/>
+		<AutoActor
+			File="panelglow"
+			OnCommand="y,-53;blend,add;diffusealpha,0"
+			NoteCrossedUpMessageCommand="finishtweening;diffusealpha,1;linear,0.3;zoom,1;diffusealpha,0"
+		/>
+		<AutoActor
+			File="panelglow"
+			OnCommand="y,+53;blend,add;diffusealpha,0"
+			NoteCrossedDownMessageCommand="finishtweening;diffusealpha,1;linear,0.3;zoom,1;diffusealpha,0"
+		/>
+	</children></ActorFrame>
+
+	<ActorFrame
+		Condition="GAMESTATE:IsHumanPlayer(PLAYER_2) and GAMESTATE:GetPlayMode()==PLAY_MODE_REGULAR and GAMESTATE:GetCurrentSteps(PLAYER_2):GetDifficulty()==DIFFICULTY_BEGINNER and PREFSMAN:GetPreference('MercifulBeginner')"
+		OnCommand="x,SCREEN_CENTER_X+160;y,SCREEN_CENTER_Y+40;rotationx,-20"
+		FOV="45"
+		VanishX="SCREEN_CENTER_X+160"
+		VanishY="SCREEN_CENTER_Y+40"
+	><children>
+		<AutoActor
+			File="platform"
+			OnCommand="diffuse,0.6,0.6,0.6,0.8"
+		/>
+		<AutoActor
+			File="panelglow"
+			OnCommand="x,-53;blend,add;diffusealpha,0"
+			NoteCrossedLeftMessageCommand="finishtweening;diffusealpha,1;linear,0.3;zoom,1;diffusealpha,0"
+		/>
+		<AutoActor
+			File="panelglow"
+			OnCommand="x,+53;blend,add;diffusealpha,0"
+			NoteCrossedRightMessageCommand="finishtweening;diffusealpha,1;linear,0.3;zoom,1;diffusealpha,0"
+		/>
+		<AutoActor
+			File="panelglow"
+			OnCommand="y,-53;blend,add;diffusealpha,0"
+			NoteCrossedUpMessageCommand="finishtweening;diffusealpha,1;linear,0.3;zoom,1;diffusealpha,0"
+		/>
+		<AutoActor
+			File="panelglow"
+			OnCommand="y,+53;blend,add;diffusealpha,0"
+			NoteCrossedDownMessageCommand="finishtweening;diffusealpha,1;linear,0.3;zoom,1;diffusealpha,0"
+		/>
+	</children></ActorFrame>
+
+</children> </ActorFrame>
+

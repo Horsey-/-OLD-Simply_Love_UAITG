@@ -1,0 +1,24 @@
+<ActorFrame> <children>
+
+	<Layer File="../ScreenOptions overlay" />
+
+	<Layer
+		Condition="GAMESTATE:IsPlayerEnabled(PLAYER_1)"
+		Font="_wendy small"
+		Text="P1 Scroll Rate"
+		Command="@'diffuse,' .. PlayerColor(PLAYER_1) .. ';ShadowLength,0;horizalign,left;zoom,0.5;x,SCREEN_CENTER_X-290;y,57;queuecommand,Update'"
+		SpeedModChangedMessageCommand="queuecommand,Update"
+		UpdateCommand="%function(self) self:settext('P1: '..DisplaySpeedMod(1)) end"
+		OffCommand="zoom,0"
+	/>
+	<Layer
+		Condition="GAMESTATE:IsPlayerEnabled(PLAYER_2)"
+		Font="_wendy small"
+		Text="P2 Scroll Rate"
+		Command="@'diffuse,' .. PlayerColor(PLAYER_2) .. ';ShadowLength,0;horizalign,right;zoom,0.5;x,SCREEN_CENTER_X+290;y,57;queuecommand,Update'"
+		SpeedModChangedMessageCommand="queuecommand,Update"
+		UpdateCommand="%function(self) self:settext('P2: '..DisplaySpeedMod(2)) end"
+		OffCommand="zoom,0"
+	/>
+	
+</children> </ActorFrame>
