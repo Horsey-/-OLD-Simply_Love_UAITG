@@ -1,3 +1,13 @@
 <ActorFrame> <children>
-	<Layer Type="Quad" Command="diffuse,#FFFFFF00;stretchto,SCREEN_LEFT,SCREEN_BOTTOM-24,SCREEN_RIGHT,SCREEN_BOTTOM;linear,.5;diffuse,#FFFFFFA0"/>	
+	<Layer
+		Condition="Color() < 13"
+		Type="Quad" 
+		Command="diffuse,#FFFFFF00;stretchto,SCREEN_LEFT,SCREEN_BOTTOM-24,SCREEN_RIGHT,SCREEN_BOTTOM;linear,.5;diffuse,#FFFFFFA0"
+	/>
+	<Layer
+		File="../BGAnimations/_13assets/bottombar.png"
+		Condition="Color() == 13"
+		InitCommand="draworder,-400"
+		OnCommand="y,SCREEN_BOTTOM+113;x,SCREEN_CENTER_X;decelerate,0.75;addy,-50"
+	/>
 </children> </ActorFrame>

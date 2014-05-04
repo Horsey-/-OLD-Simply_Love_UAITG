@@ -1,6 +1,10 @@
 <ActorFrame> <children>
-	<Layer File="ScreenWithMenuElements header"/>	
+	<Layer 
+		Condition="Color() < 13"
+		File="ScreenWithMenuElements header"
+	/>	
 	<Layer
+		Condition="Color() < 13"
 		Type="BitmapText"
 		Text="SELECT PLAY MODE"
 		File="_wendy white"

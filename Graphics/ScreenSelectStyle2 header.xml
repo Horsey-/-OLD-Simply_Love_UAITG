@@ -1,9 +1,13 @@
 <ActorFrame> <children>
-	<Layer File="ScreenWithMenuElements header"/>	
+	<Layer 
+		Condition="Color() < 13"
+		File="ScreenWithMenuElements header"
+	/>	
 	<Layer
+		Condition="Color() < 13"
 		Type="BitmapText"
 		Text="SELECT STYLE"
 		File="_wendy white"
-		InitCommand="diffuse,#FFFFFF;zoom,.4;shadowlength,0;horizalign,left;x,15;y,16"
+		InitCommand="diffuse,#FFFFFF;zoom,.4;shadowlength,0;horizalign,left;x,15;y,16;draworder,-1000"
 	/>
 </children> </ActorFrame>

@@ -19,6 +19,15 @@
 					Condition="Color() == 13"
 					File="../_13assets/statsbackgroundbubble.png"
 					InitCommand="x,SCREEN_CENTER_X-161;y,SCREEN_CENTER_Y+36"
+					OnCommand="%function(self)
+						self:addx(-EvalTweenDistance()); 
+						self:sleep(3); 
+						self:decelerate(0.3); self:addx(EvalTweenDistance())
+					end"
+					OffCommand="%function(self) 
+						self:accelerate(0.3);
+						self:addx(-EvalTweenDistance()); 
+					end"
 				/>					
 		<!-- P1 Songs Stats background Theme SL-->
 				<Layer
@@ -44,13 +53,36 @@
 			<Layer
 				File="../_13assets/steps_background.png"
 				Condition="Color() == 13"
-				OnCommand="x,SCREEN_CENTER_X-235; y,SCREEN_CENTER_Y-125;shadowlength,0"
-				InitCommand="%function(self) self:diffuse(BubbleColorRGB(PLAYER_1)) end"
+				InitCommand="%function(self) 
+					self:diffuse(BubbleColorRGB(PLAYER_1))
+				end"
+				OnCommand="%function(self)
+					self:x(SCREEN_CENTER_X-235);
+					self:y(SCREEN_CENTER_Y-125);
+					self:shadowlength(0);
+					self:diffuse(BubbleColorRGB(PLAYER_1))
+					self:addx(-EvalTweenDistance()); 
+					self:sleep(3); 
+					self:decelerate(0.3); self:addx(EvalTweenDistance())	
+				end"
+				OffCommand="%function(self) 
+					self:accelerate(0.3);
+					self:addx(-EvalTweenDistance()); 
+				end"
 			/>
 			<Layer
 				File="../_13assets/steps_frame.png"
 				Condition="Color() == 13"
-				OnCommand="x,SCREEN_CENTER_X-235; y,SCREEN_CENTER_Y-125;shadowlength,0"
+				InitCommand="x,SCREEN_CENTER_X-235; y,SCREEN_CENTER_Y-125;shadowlength,0"
+				OnCommand="%function(self)
+					self:addx(-EvalTweenDistance()); 
+					self:sleep(3); 
+					self:decelerate(0.3); self:addx(EvalTweenDistance())
+				end"
+				OffCommand="%function(self) 
+					self:accelerate(0.3);
+					self:addx(-EvalTweenDistance()); 
+				end"
 			/>
 	</children></ActorFrame>
 	<ActorFrame
@@ -71,6 +103,15 @@
 					Condition="Color() == 13"
 					File="../_13assets/statsbackgroundbubble.png"
 					InitCommand="x,SCREEN_CENTER_X+160;y,SCREEN_CENTER_Y+36"
+					OnCommand="%function(self)
+						self:addx(EvalTweenDistance()); 
+						self:sleep(3); 
+						self:decelerate(0.3); self:addx(-EvalTweenDistance())
+					end"
+					OffCommand="%function(self) 
+						self:accelerate(0.3);
+						self:addx(EvalTweenDistance()); 
+					end"
 				/>
 			<!-- P2 Songs Stats background Theme SL-->
 				<Layer
@@ -96,13 +137,37 @@
 			<Layer
 				File="../_13assets/steps_background.png"
 				Condition="Color() == 13"
-				OnCommand="x,SCREEN_CENTER_X+235; y,SCREEN_CENTER_Y-125;shadowlength,0"
-				InitCommand="%function(self) self:diffuse(BubbleColorRGB(PLAYER_2)) end"
+				OnCommand="%function(self) 
+					self:x(SCREEN_CENTER_X+235);
+					self:y(SCREEN_CENTER_Y-125);
+					self:shadowlength(0);
+					self:addx(EvalTweenDistance()); 
+					self:sleep(3); 
+					self:decelerate(0.3); 
+					self:addx(-EvalTweenDistance());
+				end"
+				InitCommand="%function(self) 		
+					self:diffuse(BubbleColorRGB(PLAYER_2))
+				end"
+				OffCommand="%function(self) 
+					self:accelerate(0.3);
+					self:addx(EvalTweenDistance()); 
+				end"
 			/>
 			<Layer
 				File="../_13assets/steps_frame.png"
 				Condition="Color() == 13"
-				OnCommand="x,SCREEN_CENTER_X+235; y,SCREEN_CENTER_Y-125;shadowlength,0"
+				InitCommand="x,SCREEN_CENTER_X+235; y,SCREEN_CENTER_Y-125;shadowlength,0"
+				OnCommand="%function(self)
+					self:addx(EvalTweenDistance()); 
+					self:sleep(3); 
+					self:decelerate(0.3); 
+					self:addx(-EvalTweenDistance())
+				end"
+				OffCommand="%function(self) 
+					self:accelerate(0.3);
+					self:addx(EvalTweenDistance()); 
+				end"
 			/>
 	</children></ActorFrame>
 <!-- Song Banner -->
